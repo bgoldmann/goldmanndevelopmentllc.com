@@ -1,65 +1,97 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  SERVICE_SLUGS,
+  SERVICE_NAMES,
+  SITE_NAME,
+} from "@/lib/data/services";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="bg-white text-zinc-900">
+      {/* Hero — H1 */}
+      <section className="mx-auto max-w-6xl px-4 py-16 text-center sm:py-24">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
+          Enterprise Cybersecurity &amp; Offensive Security Services
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600">
+          {SITE_NAME} delivers expert pentesting, cloud security, DevSecOps, compliance, vCISO, and incident response for enterprises.
+        </p>
+        <div className="mt-10">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-base font-medium text-white hover:bg-zinc-800"
+          >
+            Request Scope
+          </Link>
+        </div>
+      </section>
+
+      {/* Services — H2 blocks, internal links */}
+      <section className="border-t border-zinc-200 bg-zinc-50/50 py-16" aria-labelledby="services-heading">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 id="services-heading" className="text-center text-2xl font-bold text-zinc-900">
+            Our Services
+          </h2>
+          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICE_SLUGS.map((slug) => (
+              <li key={slug}>
+                <article className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+                  <h3 className="text-xl font-semibold text-zinc-900">
+                    <Link href={`/services/${slug}`} className="hover:text-zinc-700 hover:underline">
+                      {SERVICE_NAMES[slug]} Services
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-zinc-600">
+                    Expert {SERVICE_NAMES[slug].toLowerCase()} to strengthen your security posture.
+                  </p>
+                  <Link
+                    href={`/services/${slug}`}
+                    className="mt-4 inline-block text-sm font-medium text-zinc-900 hover:underline"
+                  >
+                    Learn more →
+                  </Link>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Trust signals */}
+      <section className="border-t border-zinc-200 py-16" aria-labelledby="trust-heading">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <h2 id="trust-heading" className="text-2xl font-bold text-zinc-900">
+            Trusted by Security-Conscious Organizations
+          </h2>
+          <p className="mt-4 text-zinc-600">
+            NDA-safe engagements. Certifications and best-practice methodologies. We work with CISOs, CTOs, and compliance teams.
           </p>
+          <div className="mt-10">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-lg border-2 border-zinc-900 px-6 py-3 text-base font-medium text-zinc-900 hover:bg-zinc-900 hover:text-white"
+            >
+              Contact Us
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* CTA ~2 scroll depths */}
+      <section className="border-t border-zinc-200 bg-zinc-900 py-16 text-white">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <h2 className="text-2xl font-bold">Ready to Secure Your Enterprise?</h2>
+          <p className="mt-4 text-zinc-300">
+            Request a scope for pentesting, compliance, or vCISO services.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-6 inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-medium text-zinc-900 hover:bg-zinc-100"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Request Scope
+          </Link>
         </div>
-      </main>
+      </section>
     </div>
   );
 }
