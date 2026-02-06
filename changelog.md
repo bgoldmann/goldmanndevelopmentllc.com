@@ -21,3 +21,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - **Data/config:** `lib/data/services.ts` (service slugs, Goldmann Group links, authority links), `.env.example`, `docs/ANALYTICS.md` for GSC/Bing/Plausible/PostHog.
   - **RSS:** `app/feed.xml/route.ts` for blog syndication (US-018).
   - **Redirects:** Placeholder in `next.config.ts` for legacy 301s (US-008).
+
+### Changed
+- **2026-02-06 — Codebase and docs update:**
+  - Added root **README.md**: project overview, repository structure, quick start, PRD/task links, tech stack, and reminder to read/update changelog.
+  - **next.config.ts:** Implemented `redirects()` async function with empty array and comment for adding legacy 301 redirects (US-008).
+  - **web/README.md:** Updated PRD section to reference existing paths only (`tasks/prd-goldmanndevelopmentllc-seo-backlinks.md`, `PRD_GoldmannDevelopmentLLC_SEO_Backlinks.md`); removed reference to non-existent `ralph-main 2/prd.json`.

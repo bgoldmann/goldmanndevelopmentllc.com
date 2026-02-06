@@ -32,7 +32,7 @@ SEO-first, backlink-optimized marketing site with Stripe payments. Built with Ne
 
 ## PRD
 
-See `../tasks/prd-goldmanndevelopmentllc-seo-backlinks.md` and `../ralph-main 2/prd.json` for user stories and acceptance criteria.
+See [tasks/prd-goldmanndevelopmentllc-seo-backlinks.md](../tasks/prd-goldmanndevelopmentllc-seo-backlinks.md) and [PRD_GoldmannDevelopmentLLC_SEO_Backlinks.md](../PRD_GoldmannDevelopmentLLC_SEO_Backlinks.md) for user stories and acceptance criteria.
 
 ## Scripts
 
