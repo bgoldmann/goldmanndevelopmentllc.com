@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Goldmann Development LLC — Website
 
-## Getting Started
+SEO-first, backlink-optimized marketing site with Stripe payments. Built with Next.js (App Router), Supabase, and Vercel.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js 16** (App Router, React 19)
+- **Tailwind CSS**
+- **Supabase** (content: services, posts, case_studies)
+- **Stripe** (Checkout, webhooks)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Copy `.env.example` to `.env.local` and set:
+   - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_SITE_URL` (e.g. `https://goldmanndevelopmentllc.com`)
+   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Run Supabase migrations (from project root):
+   ```bash
+   supabase db push
+   ```
+   Or apply the SQL in `../supabase/migrations/` manually in the Supabase dashboard.
 
-## Learn More
+3. Install and run:
+   ```bash
+   npm install
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Stripe webhook: point your Stripe webhook endpoint to `https://your-domain.com/api/webhooks/stripe` and set `STRIPE_WEBHOOK_SECRET`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## PRD
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+See `../tasks/prd-goldmanndevelopmentllc-seo-backlinks.md` and `../ralph-main 2/prd.json` for user stories and acceptance criteria.
 
-## Deploy on Vercel
+## Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — development server
+- `npm run build` — production build
+- `npm run start` — run production server
+- `npm run lint` — ESLint
