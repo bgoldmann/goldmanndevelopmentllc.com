@@ -1,96 +1,168 @@
 import Link from "next/link";
 import {
+  SERVICE_DETAILS,
   SERVICE_SLUGS,
   SERVICE_NAMES,
   SITE_NAME,
+  AUTHOR_NAME,
 } from "@/lib/data/services";
+import { FEATURED_BOOKS } from "@/lib/data/books";
+import { INSTAGRAM, YOUTUBE } from "@/lib/data/media";
+import { YouTubeLive } from "@/components/YouTubeLive";
+import { BookCard } from "@/components/BookCard";
+import { InstagramPanel } from "@/components/InstagramPanel";
+import { ButtonLink, Container, Eyebrow, GoldRule } from "@/components/ui";
 
 export default function HomePage() {
   return (
-    <div className="bg-white text-zinc-900">
-      {/* Hero — H1 */}
-      <section className="mx-auto max-w-6xl px-4 py-16 text-center sm:py-24">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
-          Enterprise Cybersecurity &amp; Offensive Security Services
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600">
-          {SITE_NAME} delivers expert pentesting, cloud security, DevSecOps, compliance, vCISO, and incident response for enterprises.
-        </p>
-        <div className="mt-10">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-base font-medium text-white hover:bg-zinc-800"
-          >
-            Request Scope
-          </Link>
-        </div>
+    <div className="bg-background text-foreground">
+      <section className="relative overflow-hidden gold-field">
+        <div className="noise absolute inset-0" />
+        <Container className="relative py-20 sm:py-28">
+          <Eyebrow>{SITE_NAME}</Eyebrow>
+          <p className="mt-6 max-w-4xl font-serif text-5xl leading-[1.05] text-gold-soft sm:text-6xl lg:text-7xl">
+            Intelligence, offense, and a live signal.
+          </p>
+          <h1 className="mt-8 max-w-2xl text-lg font-medium tracking-tight text-foreground sm:text-xl">
+            Enterprise Cybersecurity &amp; Offensive Security Services
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            {SITE_NAME} delivers pentesting, cloud security, DevSecOps, compliance, vCISO, and incident response — and publishes the {AUTHOR_NAME} library while broadcasting {YOUTUBE.title}.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <ButtonLink href="/contact" variant="gold">
+              Request Scope
+            </ButtonLink>
+            <ButtonLink href="/live" variant="ghost">
+              Watch Live
+            </ButtonLink>
+            <ButtonLink href="/books" variant="ghost">
+              Browse Books
+            </ButtonLink>
+          </div>
+        </Container>
+        <GoldRule />
       </section>
 
-      {/* Services — H2 blocks, internal links */}
-      <section className="border-t border-zinc-200 bg-zinc-50/50 py-16" aria-labelledby="services-heading">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 id="services-heading" className="text-center text-2xl font-bold text-zinc-900">
+      <section className="py-16 sm:py-20" aria-labelledby="live-heading">
+        <Container>
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <Eyebrow>On air</Eyebrow>
+              <h2 id="live-heading" className="mt-3 font-serif text-3xl text-gold-soft sm:text-4xl">
+                {YOUTUBE.title}
+              </h2>
+              <p className="mt-2 text-muted">{YOUTUBE.subtitle}</p>
+            </div>
+            <ButtonLink href={YOUTUBE.channelUrl} variant="ghost" external>
+              {YOUTUBE.handle}
+            </ButtonLink>
+          </div>
+          <YouTubeLive />
+        </Container>
+      </section>
+
+      <section className="border-y border-gold/10 bg-panel/60 py-16 sm:py-20" aria-labelledby="services-heading">
+        <Container>
+          <Eyebrow>Practice</Eyebrow>
+          <h2 id="services-heading" className="mt-3 font-serif text-3xl text-gold-soft sm:text-4xl">
             Our Services
           </h2>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICE_SLUGS.map((slug) => (
-              <li key={slug}>
-                <article className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
-                  <h3 className="text-xl font-semibold text-zinc-900">
-                    <Link href={`/services/${slug}`} className="hover:text-zinc-700 hover:underline">
-                      {SERVICE_NAMES[slug]} Services
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICE_SLUGS.map((slug) => {
+              const detail = SERVICE_DETAILS[slug];
+              return (
+                <li key={slug}>
+                  <article className="flex h-full flex-col rounded-2xl border border-gold/15 bg-background p-6 transition hover:border-gold/40">
+                    <span className="font-mono text-xs text-gold">{detail.index}</span>
+                    <h3 className="mt-3 font-serif text-2xl text-gold-soft">
+                      <Link href={`/services/${slug}`} className="hover:underline">
+                        {SERVICE_NAMES[slug]} Services
+                      </Link>
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                      {detail.tagline}
+                    </p>
+                    <Link
+                      href={`/services/${slug}`}
+                      className="mt-6 text-sm font-medium text-gold hover:text-gold-soft"
+                    >
+                      Learn more →
                     </Link>
-                  </h3>
-                  <p className="mt-2 text-zinc-600">
-                    Expert {SERVICE_NAMES[slug].toLowerCase()} to strengthen your security posture.
-                  </p>
-                  <Link
-                    href={`/services/${slug}`}
-                    className="mt-4 inline-block text-sm font-medium text-zinc-900 hover:underline"
-                  >
-                    Learn more →
-                  </Link>
-                </article>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        </Container>
+      </section>
+
+      <section className="py-16 sm:py-20" aria-labelledby="books-heading">
+        <Container>
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <Eyebrow>Library</Eyebrow>
+              <h2 id="books-heading" className="mt-3 font-serif text-3xl text-gold-soft sm:text-4xl">
+                Books on Amazon &amp; Apple Books
+              </h2>
+              <p className="mt-2 max-w-xl text-muted">
+                The AI Can Hacked series and the Siri, Explain guides — written by {AUTHOR_NAME}.
+              </p>
+            </div>
+            <ButtonLink href="/books" variant="ghost">
+              Full catalog
+            </ButtonLink>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURED_BOOKS.map((book) => (
+              <li key={book.slug}>
+                <BookCard book={book} />
               </li>
             ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
-      {/* Trust signals */}
-      <section className="border-t border-zinc-200 py-16" aria-labelledby="trust-heading">
-        <div className="mx-auto max-w-6xl px-4 text-center">
-          <h2 id="trust-heading" className="text-2xl font-bold text-zinc-900">
-            Trusted by Security-Conscious Organizations
+      <section className="border-t border-gold/10 py-16 sm:py-20" aria-labelledby="social-heading">
+        <Container>
+          <h2 id="social-heading" className="sr-only">
+            Instagram
           </h2>
-          <p className="mt-4 text-zinc-600">
-            NDA-safe engagements. Certifications and best-practice methodologies. We work with CISOs, CTOs, and compliance teams.
-          </p>
-          <div className="mt-10">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-zinc-900 px-6 py-3 text-base font-medium text-zinc-900 hover:bg-zinc-900 hover:text-white"
-            >
-              Contact Us
-            </Link>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <InstagramPanel />
+            <div className="rounded-2xl border border-gold/15 bg-panel p-8 sm:p-10">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-gold">Trust</p>
+              <h3 className="mt-3 font-serif text-3xl text-gold-soft">
+                Trusted by security-conscious organizations
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                NDA-safe engagements. Methodologies aligned with OWASP, NIST, and ISO 27001. We work with CISOs, CTOs, and compliance teams — then publish what the industry can reuse.
+              </p>
+              <p className="mt-6 text-sm text-muted">
+                Follow {INSTAGRAM.handle} and {YOUTUBE.handle} for the public side of the studio.
+              </p>
+              <div className="mt-8">
+                <ButtonLink href="/contact" variant="ghost">
+                  Contact Us
+                </ButtonLink>
+              </div>
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* CTA ~2 scroll depths */}
-      <section className="border-t border-zinc-200 bg-zinc-900 py-16 text-white">
-        <div className="mx-auto max-w-6xl px-4 text-center">
-          <h2 className="text-2xl font-bold">Ready to Secure Your Enterprise?</h2>
-          <p className="mt-4 text-zinc-300">
+      <section className="border-t border-gold/15 bg-gold py-16 text-background">
+        <Container className="text-center">
+          <h2 className="font-serif text-3xl sm:text-4xl">Ready to secure your enterprise?</h2>
+          <p className="mx-auto mt-4 max-w-xl text-background/75">
             Request a scope for pentesting, compliance, or vCISO services.
           </p>
-          <Link
-            href="/contact"
-            className="mt-6 inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-medium text-zinc-900 hover:bg-zinc-100"
-          >
-            Request Scope
-          </Link>
-        </div>
+          <div className="mt-8">
+            <ButtonLink href="/contact" variant="dark">
+              Request Scope
+            </ButtonLink>
+          </div>
+        </Container>
       </section>
     </div>
   );

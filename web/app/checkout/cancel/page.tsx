@@ -1,6 +1,5 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/data/services";
+import { ButtonLink, Container } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Checkout Cancelled",
@@ -10,14 +9,15 @@ export const metadata: Metadata = {
 
 export default function CheckoutCancelPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-16 text-center">
-      <h1 className="text-3xl font-bold text-zinc-900">Checkout Cancelled</h1>
-      <p className="mt-4 text-zinc-600">
+    <Container className="py-24 text-center">
+      <p className="text-[11px] uppercase tracking-[0.22em] text-gold">Paused</p>
+      <h1 className="mt-4 font-serif text-4xl text-gold-soft">Checkout Cancelled</h1>
+      <p className="mx-auto mt-4 max-w-md text-muted">
         You cancelled the checkout. You can request a scope again from the Contact page.
       </p>
-      <Link href="/contact" className="mt-8 inline-block rounded-lg bg-zinc-900 px-6 py-3 font-medium text-white hover:bg-zinc-800">
-        Back to Contact
-      </Link>
-    </div>
+      <div className="mt-8">
+        <ButtonLink href="/contact" variant="gold">Back to Contact</ButtonLink>
+      </div>
+    </Container>
   );
 }

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { SITE_URL, SITE_NAME } from "@/lib/data/services";
+import { Container, PageHero } from "@/components/ui";
 
-export const revalidate = 3600; // ISR: revalidate every hour
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Blog & Resources",
@@ -10,7 +11,6 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE_URL + "/resources" },
 };
 
-// In production, fetch from Supabase posts table
 const PLACEHOLDER_POSTS = [
   { slug: "what-is-pentesting", title: "What Is Pentesting?", excerpt: "An introduction to penetration testing for enterprises." },
   { slug: "soc2-readiness-guide", title: "SOC 2 Readiness Guide", excerpt: "Steps to prepare for SOC 2 compliance." },
@@ -18,26 +18,33 @@ const PLACEHOLDER_POSTS = [
 
 export default function ResourcesPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-4xl font-bold text-zinc-900">Blog &amp; Resources</h1>
-      <p className="mt-4 text-zinc-600">
-        Security explainers, compliance checklists, and best practices from {SITE_NAME}.
-      </p>
-      <ul className="mt-10 space-y-6">
-        {PLACEHOLDER_POSTS.map((post) => (
-          <li key={post.slug}>
-            <article>
-              <Link href={"/resources/" + post.slug} className="group">
-                <h2 className="text-xl font-semibold text-zinc-900 group-hover:underline">{post.title}</h2>
-                <p className="mt-1 text-zinc-600">{post.excerpt}</p>
-              </Link>
-            </article>
-          </li>
-        ))}
-      </ul>
-      <p className="mt-8 text-sm text-zinc-500">
-        <Link href="/feed.xml" className="underline">RSS feed</Link> · <Link href="/checklists" className="underline">Security checklists</Link> · <Link href="/glossary" className="underline">Glossary</Link>
-      </p>
+    <div>
+      <PageHero
+        eyebrow="Field notes"
+        title="Blog & Resources"
+        lede={`Security explainers, compliance checklists, and best practices from ${SITE_NAME}.`}
+      />
+      <Container className="py-12 sm:py-16">
+        <ul className="grid gap-5 sm:grid-cols-2">
+          {PLACEHOLDER_POSTS.map((post) => (
+            <li key={post.slug}>
+              <article className="h-full rounded-2xl border border-gold/15 bg-panel p-6 transition hover:border-gold/40">
+                <Link href={"/resources/" + post.slug} className="group">
+                  <h2 className="font-serif text-2xl text-gold-soft group-hover:underline">{post.title}</h2>
+                  <p className="mt-3 text-sm text-muted">{post.excerpt}</p>
+                </Link>
+              </article>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-10 text-sm text-muted">
+          <Link href="/feed.xml" className="underline hover:text-gold-soft">RSS feed</Link>
+          {" · "}
+          <Link href="/checklists" className="underline hover:text-gold-soft">Security checklists</Link>
+          {" · "}
+          <Link href="/glossary" className="underline hover:text-gold-soft">Glossary</Link>
+        </p>
+      </Container>
     </div>
   );
 }

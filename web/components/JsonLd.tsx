@@ -1,4 +1,5 @@
-import { SITE_NAME, SITE_URL } from "@/lib/data/services";
+import { AUTHOR_NAME, SITE_NAME, SITE_URL } from "@/lib/data/services";
+import { INSTAGRAM, YOUTUBE } from "@/lib/data/media";
 
 type JsonLdProps = {
   data: Record<string, unknown> | Record<string, unknown>[];
@@ -24,6 +25,8 @@ export function OrganizationSchema() {
         url: SITE_URL,
         description:
           "Enterprise cybersecurity and offensive security services. Pentesting, cloud security, DevSecOps, compliance, vCISO, and incident response.",
+        founder: { "@type": "Person", name: AUTHOR_NAME },
+        sameAs: [YOUTUBE.channelUrl, INSTAGRAM.url],
       }}
     />
   );

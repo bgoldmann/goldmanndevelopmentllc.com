@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/data/services";
+import { Container, PageHero } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Privacy",
@@ -9,11 +10,17 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-4xl font-bold text-zinc-900">Privacy Policy</h1>
-      <p className="mt-4 text-zinc-600">
-        We respect your privacy. This page is a placeholder — add your full privacy policy here. Payment data is processed by Stripe; see Stripe&apos;s privacy policy for payment handling.
-      </p>
+    <div>
+      <PageHero
+        eyebrow="Legal"
+        title="Privacy Policy"
+        lede="We respect your privacy. Payment data is processed by Stripe; see Stripe's privacy policy for payment handling."
+      />
+      <Container className="py-12">
+        <p className="max-w-3xl leading-relaxed text-muted">
+          This page is a placeholder — add your full privacy policy here. We collect only what is needed to respond to scope requests and operate the site.
+        </p>
+      </Container>
     </div>
   );
 }

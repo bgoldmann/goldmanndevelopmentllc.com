@@ -26,7 +26,7 @@ export function CheckoutButton() {
       type="button"
       onClick={handleCheckout}
       disabled={loading}
-      className="rounded-lg bg-zinc-900 px-6 py-3 font-medium text-white hover:bg-zinc-800 disabled:opacity-50"
+      className="rounded-full bg-gold px-6 py-3 font-medium text-background hover:bg-gold-soft disabled:opacity-50"
     >
       {loading ? "Redirecting…" : "Request Scope — Pay Deposit"}
     </button>

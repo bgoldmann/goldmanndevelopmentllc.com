@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/data/services";
+import { Container, PageHero } from "@/components/ui";
 
 const CHECKLISTS: Record<string, { title: string; body: string }> = {
   "pre-pentest": {
@@ -32,10 +33,14 @@ export default async function ChecklistDetailPage({ params }: Props) {
   const c = CHECKLISTS[slug];
   if (!c) notFound();
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-4xl font-bold text-zinc-900">{c.title}</h1>
-      <p className="mt-6 text-zinc-600">{c.body}</p>
-      <Link href="/checklists" className="mt-8 inline-block text-zinc-600 hover:underline">← All checklists</Link>
+    <div>
+      <PageHero eyebrow="Checklist" title={c.title} lede="A public, shareable starting list — not a substitute for a scoped engagement." />
+      <Container className="py-12">
+        <p className="max-w-3xl text-lg leading-relaxed text-muted">{c.body}</p>
+        <Link href="/checklists" className="mt-10 inline-block text-gold hover:text-gold-soft">
+          ← All checklists
+        </Link>
+      </Container>
     </div>
   );
 }

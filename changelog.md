@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+- **2026-10-15 — Studio redesign:** Dark gold editorial design across the site (Instrument Serif + Outfit), mobile navigation, richer service copy, and new Live and Books surfaces. Homepage now features Iran NRTV Live (`@IranNRTV_LIVE`), Instagram (`@18th19thday`), and the Bernie Goldmann catalog on Amazon and Apple Books.
+
 ### Added
 - **Expanded PRD and task breakdown for SEO & Backlinks (with Stripe):**
   - Added `tasks/prd-goldmanndevelopmentllc-seo-backlinks.md` — Full expanded PRD with Introduction, Goals, 28 User Stories (US-001–US-028) with acceptance criteria, Functional Requirements (FR-1–FR-16), Non-Goals, Design/Technical Considerations, Success Metrics, Open Questions, and Stripe/Payments section. Covers Supabase schema, Technical SEO, Page structure, Internal/External backlinks, Goldmann Group, Backlink automation, Analytics, and Stripe payment system.

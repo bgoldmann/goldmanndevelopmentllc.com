@@ -1,5 +1,7 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/data/services";
+import { Container, PageHero } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Security Glossary",
@@ -15,20 +17,25 @@ const TERMS = [
 
 export default function GlossaryPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-4xl font-bold text-zinc-900">Security Glossary</h1>
-      <p className="mt-4 text-zinc-600">
-        A–Z definitions for common cybersecurity and compliance terms.
-      </p>
-      <dl className="mt-8 space-y-6">
-        {TERMS.map(({ term, definition }) => (
-          <div key={term}>
-            <dt className="font-semibold text-zinc-900">{term}</dt>
-            <dd className="mt-1 text-zinc-600">{definition}</dd>
-          </div>
-        ))}
-      </dl>
-      <Link href="/resources" className="mt-8 inline-block text-zinc-600 hover:underline">← Resources</Link>
+    <div>
+      <PageHero
+        eyebrow="Lexicon"
+        title="Security Glossary"
+        lede="A–Z definitions for common cybersecurity and compliance terms."
+      />
+      <Container className="py-12 sm:py-16">
+        <dl className="space-y-6">
+          {TERMS.map(({ term, definition }) => (
+            <div key={term} className="rounded-2xl border border-gold/15 bg-panel p-6">
+              <dt className="font-serif text-2xl text-gold-soft">{term}</dt>
+              <dd className="mt-2 text-muted">{definition}</dd>
+            </div>
+          ))}
+        </dl>
+        <Link href="/resources" className="mt-10 inline-block text-sm text-muted hover:text-gold-soft">
+          ← Resources
+        </Link>
+      </Container>
     </div>
   );
 }

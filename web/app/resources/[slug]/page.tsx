@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SITE_URL, SITE_NAME } from "@/lib/data/services";
+import { SITE_URL, SITE_NAME, AUTHORITY_LINKS } from "@/lib/data/services";
 import { BreadcrumbSchema } from "@/components/JsonLd";
-import { AUTHORITY_LINKS } from "@/lib/data/services";
+import { Container, PageHero } from "@/components/ui";
 
 export const revalidate = 3600;
 
@@ -44,18 +44,23 @@ export default async function ResourcePostPage({ params }: Props) {
   const url = SITE_URL + "/resources/" + slug;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
+    <div>
       <BreadcrumbSchema items={[{ name: "Home", url: SITE_URL }, { name: "Resources", url: SITE_URL + "/resources" }, { name: post.title, url }]} />
-      <article>
-        <h1 className="text-4xl font-bold text-zinc-900">{post.title}</h1>
-        <div className="mt-6 prose prose-zinc max-w-none">
-          <p className="text-zinc-600">{post.body}</p>
-        </div>
-        <p className="mt-8 text-sm text-zinc-500">
-          References: <a href={AUTHORITY_LINKS.owasp.href} rel="nofollow noopener noreferrer" target="_blank" className="underline">{AUTHORITY_LINKS.owasp.label}</a>, <a href={AUTHORITY_LINKS.nist.href} rel="nofollow noopener noreferrer" target="_blank" className="underline">{AUTHORITY_LINKS.nist.label}</a>.
-        </p>
-        <Link href="/resources" className="mt-6 inline-block text-zinc-900 hover:underline">← Back to Resources</Link>
-      </article>
+      <PageHero eyebrow="Essay" title={post.title} lede="From the Goldmann Development library of field notes." />
+      <Container className="py-12">
+        <article className="max-w-3xl">
+          <p className="text-lg leading-relaxed text-muted">{post.body}</p>
+          <p className="mt-10 text-sm text-muted">
+            References:{" "}
+            <a href={AUTHORITY_LINKS.owasp.href} rel="nofollow noopener noreferrer" target="_blank" className="underline hover:text-gold-soft">{AUTHORITY_LINKS.owasp.label}</a>
+            ,{" "}
+            <a href={AUTHORITY_LINKS.nist.href} rel="nofollow noopener noreferrer" target="_blank" className="underline hover:text-gold-soft">{AUTHORITY_LINKS.nist.label}</a>.
+          </p>
+          <Link href="/resources" className="mt-8 inline-block text-gold hover:text-gold-soft">
+            ← Back to Resources
+          </Link>
+        </article>
+      </Container>
     </div>
   );
 }

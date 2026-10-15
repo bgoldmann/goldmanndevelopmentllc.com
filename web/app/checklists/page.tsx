@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { SITE_URL } from "@/lib/data/services";
+import { Container, PageHero } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Security Checklists",
@@ -15,19 +16,29 @@ const CHECKLISTS = [
 
 export default function ChecklistsPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <h1 className="text-4xl font-bold text-zinc-900">Security Checklists</h1>
-      <p className="mt-4 text-zinc-600">
-        Use these checklists to prepare for audits and pentests. Free to use and share.
-      </p>
-      <ul className="mt-8 space-y-4">
-        {CHECKLISTS.map((c) => (
-          <li key={c.slug}>
-            <Link href={"/checklists/" + c.slug} className="text-lg font-medium text-zinc-900 hover:underline">{c.title}</Link>
-          </li>
-        ))}
-      </ul>
-      <Link href="/resources" className="mt-8 inline-block text-zinc-600 hover:underline">← Resources</Link>
+    <div>
+      <PageHero
+        eyebrow="Prep"
+        title="Security Checklists"
+        lede="Use these checklists to prepare for audits and pentests. Free to use and share."
+      />
+      <Container className="py-12 sm:py-16">
+        <ul className="grid gap-5 sm:grid-cols-2">
+          {CHECKLISTS.map((c) => (
+            <li key={c.slug}>
+              <Link
+                href={"/checklists/" + c.slug}
+                className="block rounded-2xl border border-gold/15 bg-panel p-6 font-serif text-2xl text-gold-soft hover:border-gold/40"
+              >
+                {c.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Link href="/resources" className="mt-10 inline-block text-sm text-muted hover:text-gold-soft">
+          ← Resources
+        </Link>
+      </Container>
     </div>
   );
 }
